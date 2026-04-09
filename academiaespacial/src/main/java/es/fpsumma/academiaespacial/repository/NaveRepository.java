@@ -12,10 +12,10 @@ public interface NaveRepository {
     public Nave findById(Integer id);
 
 
-    public void updateById(Nave nave);
+
 
     public void deleteById(Integer id);
 
-    public void save();
+    public void save(Nave nave );
 
 }

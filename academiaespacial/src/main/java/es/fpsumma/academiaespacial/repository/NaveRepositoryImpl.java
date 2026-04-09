@@ -1,0 +1,56 @@
+package es.fpsumma.academiaespacial.repository;
+
+import es.fpsumma.academiaespacial.model.Nave;
+import lombok.Data;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+@Data
+public class NaveRepositoryImpl implements NaveRepository {
+    private final JdbcTemplate jdbcTemplate;
+
+
+    @Override
+    public List<Nave> listAll() {
+        String sql = "SELECT * FROM naves ";
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new Nave(
+                        rs.getString("nombre"),
+                        rs.getString("modelo"),
+                        rs.getInt("pilotoId")
+
+                )
+        );
+
+    }
+
+    @Override
+    public Nave findById(Integer id) {
+        String sql = "SELECT * FROM naves WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                new Nave(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("modelo"),
+                        rs.getInt("pilotoId")
+                ));
+    }
+
+
+    @Override
+    public void deleteById(Integer id) {
+
+        String sql = "DELETE FROM nave WHERE id = ? ";
+        jdbcTemplate.update(sql, id);
+
+    }
+
+    @Override
+    public void save(Nave nave) {
+        String sql = "INSERT INTO naves (id, nombre,modelo,pilotoId ) VALUES (?,?,?,?)";
+        jdbcTemplate.update(sql, nave.getNombre(), nave.getModelo(), nave.getPilotoId());
+    }
+}

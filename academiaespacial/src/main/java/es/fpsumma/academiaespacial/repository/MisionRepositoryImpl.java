@@ -38,7 +38,6 @@ public class MisionRepositoryImpl implements MisionRepository {
         String sql = "SELECT * FROM misiones WHERE id = ? ";
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Mision(
-                        rs.getInt("id"),
                         rs.getString("codigo"),
                         rs.getString("destino"),
                         EstadoMision.valueOf(rs.getString("estadoMision")),
@@ -49,21 +48,23 @@ public class MisionRepositoryImpl implements MisionRepository {
     @Override
     public void save(Mision mision) {
         String sql = "INSERT INTO misiones (id,codigo,destino,estadoMision,naveId) VALUES (?,?,?,?,?)";
-        jdbcTemplate.update(sql, mision.getId(), mision.getCodigo(), mision.getDestino(), mision.getEstadoMision(), mision.getNaveId()) ;
+        jdbcTemplate.update(sql, mision.getCodigo(), mision.getDestino(), mision.getEstadoMision(), mision.getNaveId());
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        String sql = "DELETE FROM misiones WHERE id = ? ";
+        jdbcTemplate.update(sql, id);
     }
 
     @Override
-    public void updateById(Mision mision) {
+
+    public void updateStateById(Integer id, EstadoMision estadoMision) {
+        String sql = "UPDATE misiones SET ? WHERE id = ? ";
+        jdbcTemplate.update(sql, id, estadoMision);
 
     }
 
-    @Override
-    public List<Mision> findByPilot(Integer idPiloto) {
-        return List.of();
-    }
+
 }
+

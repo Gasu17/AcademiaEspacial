@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 
 import java.util.List;
@@ -14,9 +15,9 @@ public interface MisionRepository {
 
     public void deleteById(Integer id);
 
-    public void updateById (Mision mision);
+    public void updateStateById (Integer id, EstadoMision estadoMision);
 
-    public List<Mision> findByPilot (Integer idPiloto);
+
 
 
 

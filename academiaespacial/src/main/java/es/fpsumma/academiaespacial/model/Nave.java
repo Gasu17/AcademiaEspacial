@@ -14,5 +14,9 @@ public class Nave {
     private String modelo;
     private Integer pilotoId;
 
-
+    public Nave(String nombre, String modelo, Integer pilotoId) {
+        this.nombre = nombre;
+        this.modelo = modelo;
+        this.pilotoId = pilotoId;
+    }
 }
