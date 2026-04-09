@@ -32,8 +32,9 @@ public class PilotoServiceImpl implements PilotoService {
         Piloto piloto = new Piloto(nombre, rango);
         pilotoRepository.save(piloto);
     }
-    public Optional <Piloto> encontrarPorId (Integer id) {
-        return pilotoRepository.findById(id).or()
+    public  Optional <Piloto> encontrarPorId (Integer id) {
+        return Optional.of(pilotoRepository.findById(id));
+
 
     }
 }

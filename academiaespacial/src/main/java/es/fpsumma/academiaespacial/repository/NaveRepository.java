@@ -12,10 +12,10 @@ public interface NaveRepository {
     public Nave findById(Integer id);
 
 
-
-
     public void deleteById(Integer id);
 
-    public void save(Nave nave );
+    public void save(Nave nave);
+
+    public Piloto viewAsignedPilot (Integer idNave);
 
 }

@@ -15,10 +15,9 @@ public interface MisionRepository {
 
     public void deleteById(Integer id);
 
-    public void updateStateById (Integer id, EstadoMision estadoMision);
+    public void updateStateById(Integer id, EstadoMision estadoMision);
 
-
-
+    public List<Mision> filterMisionByPilotId(Integer idPiloto);
 
 
 }

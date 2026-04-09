@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.model;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,9 @@ import lombok.NoArgsConstructor;
 public class Nave {
 
     private Integer id;
+    @NotNull
     private String nombre;
+    @NotNull
     private String modelo;
     private Integer pilotoId;
 

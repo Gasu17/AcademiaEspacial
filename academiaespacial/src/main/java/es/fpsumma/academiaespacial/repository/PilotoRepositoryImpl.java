@@ -28,7 +28,7 @@ public class PilotoRepositoryImpl implements PilotoRepository {
     }
 
     @Override
-    public Optional<Piloto> findById(Integer id) {
+    public Piloto  findById(Integer id) {
         String sql = "SELECT * FROM pilotos WHERE id = ? ";
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Piloto(

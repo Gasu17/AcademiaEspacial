@@ -8,9 +8,12 @@ import java.util.Optional;
 
 public interface PilotoService {
 
-    public List<Piloto> listarPilotos ();
-    public void borrarPiloto ( Integer id);
-    public void crearPiloto( String nombre, String rango);
-    public Optional <Piloto> encontrarPorId (Integer id);
+    public List<Piloto> listarPilotos();
+
+    public void borrarPiloto(Integer id);
+
+    public void crearPiloto(String nombre, String rango);
+
+    public Optional<Piloto> encontrarPorId(Integer id);
 
 }

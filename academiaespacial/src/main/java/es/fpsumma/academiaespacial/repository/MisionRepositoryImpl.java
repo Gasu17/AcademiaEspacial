@@ -60,9 +60,34 @@ public class MisionRepositoryImpl implements MisionRepository {
     @Override
 
     public void updateStateById(Integer id, EstadoMision estadoMision) {
-        String sql = "UPDATE misiones SET ? WHERE id = ? ";
+        String sql = "UPDATE misiones SET estado = ? WHERE id = ? ";
         jdbcTemplate.update(sql, id, estadoMision);
 
+    }
+
+    @Override
+    public List<Mision> filterMisionByPilotId(Integer idPiloto) {
+        String sql = """
+                SELECT
+                    m.id,
+                    m.codigo,
+                    m.destino,
+                    m.estado,
+                    m.nave_id
+                FROM misiones m
+                JOIN naves n ON m.nave_id = n.id
+                JOIN pilotos p ON n.piloto_id = p.id
+                WHERE p.id = ?;
+                """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new Mision(
+                        rs.getInt("id"),
+                        rs.getString("codigo"),
+                        rs.getString("destino"),
+                        EstadoMision.valueOf(rs.getString("estado")),
+                        rs.getInt("nave_id")
+                ), idPiloto);
     }
 
 

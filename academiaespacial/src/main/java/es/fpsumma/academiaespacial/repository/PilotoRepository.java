@@ -9,7 +9,7 @@ public interface PilotoRepository {
 
     public List<Piloto> listAll();
 
-    public Optional<Piloto> findById(Integer id);
+    public Piloto findById(Integer id);
 
 
     public void deleteById(Integer id);
