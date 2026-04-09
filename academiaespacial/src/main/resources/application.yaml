@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3308/academia_espacial?useSSL=false&serverTimezone=UTC
+    username: alumno
+    password: alumno
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  sql:
+    init:
+      mode: never
+
+server:
+  port: 8080
