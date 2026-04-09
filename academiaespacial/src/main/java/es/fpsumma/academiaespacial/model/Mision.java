@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Misiones {
+public class Mision {
     private Integer id;
     private String codigo;
     private String destino;
-    private EstadoMision estadoMision;
+    private EstadoMision  estadoMision;
     private Integer naveId;
 
 }

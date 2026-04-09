@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Naves {
+public class Nave {
 
     private Integer id;
     private String nombre;
