@@ -1,5 +1,5 @@
 package es.fpsumma.academiaespacial.model;
 
 public enum EstadoMision {
-    PENDIENTE, EN_PROCESO, COMPLETADA, CANCELADA
+ EN_CURSO, COMPLETADA, PLANIFICADA
 }

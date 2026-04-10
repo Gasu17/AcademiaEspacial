@@ -36,8 +36,8 @@ public class NaveRepositoryImpl implements NaveRepository {
                         rs.getInt("id"),
                         rs.getString("nombre"),
                         rs.getString("modelo"),
-                        rs.getInt("pilotoId")
-                ));
+                        rs.getInt("piloto_id")
+                ),id );
     }
 
 

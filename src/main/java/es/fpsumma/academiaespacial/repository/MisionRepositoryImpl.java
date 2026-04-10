@@ -3,6 +3,7 @@ package es.fpsumma.academiaespacial.repository;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,21 +11,22 @@ import java.util.List;
 
 @Data
 @Repository
+@Slf4j
 public class MisionRepositoryImpl implements MisionRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Mision> listAll() {
-        String sql = "SELECT * FROM misiones ";
+        String sql = "SELECT * FROM misiones";
 
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Mision(
                         rs.getInt("id"),
                         rs.getString("codigo"),
                         rs.getString("destino"),
-                        EstadoMision.valueOf(rs.getString("estadoMision")),
-                        rs.getInt("naveId")
+                        EstadoMision.valueOf(rs.getString("estado")),
+                        rs.getInt("nave_id")
 
 
                 )
@@ -35,13 +37,13 @@ public class MisionRepositoryImpl implements MisionRepository {
 
     @Override
     public Mision findById(Integer id) {
-        String sql = "SELECT * FROM misiones WHERE id = ? ";
+        String sql = "SELECT * FROM misiones WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Mision(
                         rs.getString("codigo"),
                         rs.getString("destino"),
-                        EstadoMision.valueOf(rs.getString("estadoMision")),
-                        rs.getInt("naveId")
+                        EstadoMision.valueOf(rs.getString("estado")),
+                        rs.getInt("nave_id")
                 ), id);
     }
 
@@ -77,17 +79,18 @@ public class MisionRepositoryImpl implements MisionRepository {
                 FROM misiones m
                 JOIN naves n ON m.nave_id = n.id
                 JOIN pilotos p ON n.piloto_id = p.id
-                WHERE p.id = ?;
+                WHERE p.id = ?
                 """;
 
         return jdbcTemplate.query(sql, (rs, rowNum) ->
-                new Mision(
+                        new Mision(
                         rs.getInt("id"),
                         rs.getString("codigo"),
                         rs.getString("destino"),
                         EstadoMision.valueOf(rs.getString("estado")),
                         rs.getInt("nave_id")
                 ), idPiloto);
+
     }
 
 
