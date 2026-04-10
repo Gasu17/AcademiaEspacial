@@ -21,7 +21,7 @@ public class NaveRepositoryImpl implements NaveRepository {
                 new Nave(
                         rs.getString("nombre"),
                         rs.getString("modelo"),
-                        rs.getInt("pilotoId")
+                        rs.getInt("piloto_id")
 
                 )
         );

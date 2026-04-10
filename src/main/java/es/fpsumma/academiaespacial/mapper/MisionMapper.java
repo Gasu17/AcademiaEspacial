@@ -7,9 +7,9 @@ import lombok.Data;
 
 import javax.swing.tree.RowMapper;
 // ver Lo de RowMapper
-public class MisionMapper implements RowMapper<Nave> {
+// public class MisionMapper implements RowMapper<Nave> {
 
 
 
 
-}
+

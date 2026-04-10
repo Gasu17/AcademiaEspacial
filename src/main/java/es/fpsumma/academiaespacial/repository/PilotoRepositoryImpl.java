@@ -34,7 +34,7 @@ public class PilotoRepositoryImpl implements PilotoRepository {
                 new Piloto(
                         rs.getString("nombre"),
                         rs.getString("rango")
-                ));
+                ), id);
 
     }
 
