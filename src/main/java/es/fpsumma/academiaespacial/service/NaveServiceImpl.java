@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.service;
 
+import es.fpsumma.academiaespacial.dto.CreateNaveDto;
 import es.fpsumma.academiaespacial.exceptions.NotFoundException;
 import es.fpsumma.academiaespacial.model.Nave;
 import es.fpsumma.academiaespacial.model.Piloto;
@@ -30,26 +31,29 @@ public class NaveServiceImpl implements NaveService {
     }
 
     @Override
-    public Optional<Nave> encontrarPorId(Integer id) {
-        return Optional.of(naveRepository.findById(id));
+    public Nave encontrarPorId(Integer id) {
+        try {
+            return naveRepository.findById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException("Nave no encontrada");
+        }
     }
 
     @Override
     public void borrarPorId(Integer id) {
+
         naveRepository.deleteById(id);
     }
 
     @Override
-    public void registrarNave(String nombre, String modelo, Integer pilotoId) {
-        if (pilotoId != null) {
-            if (pilotoService.encontrarPorId(pilotoId).isEmpty()) {
-                throw new NotFoundException("Id del piloto no encontrada");
-            }
+    public void registrarNave(CreateNaveDto createNaveDto) {
+        if (createNaveDto.pilotoId() != null) {
+            pilotoService.encontrarPorId(createNaveDto.pilotoId());
         }
         Nave nave = new Nave(
-                nombre,
-                modelo,
-                pilotoId
+                createNaveDto.nombre(),
+                createNaveDto.modelo(),
+                createNaveDto.pilotoId()
         );
 
         naveRepository.save(nave);
@@ -60,8 +64,8 @@ public class NaveServiceImpl implements NaveService {
     @Override
     // Permite ver el nombre de la nave y el piloto que está asignado a ella
     // REVISAR SI PASAR UN MAP O SIMPLEMENTE REVISAR Q NAVE ESTA ASIGANDA A QUE PILOTO
-    public Map<String, Optional<Piloto>> verTodosLosPilotoAsignados() {
-        Map<String, Optional<Piloto>> navesPilotos = new HashMap<>();
+    public Map<String, Piloto> verTodosLosPilotoAsignados() {
+        Map<String, Piloto> navesPilotos = new HashMap<>();
 
         for (Nave nave : naveRepository.listAll()) {
             navesPilotos.put(nave.getNombre(), pilotoService.encontrarPorId(nave.getPilotoId()));
@@ -71,8 +75,9 @@ public class NaveServiceImpl implements NaveService {
     }
 
     public Piloto verPilotoAsignado(Integer idNave) {
-        encontrarPorId(idNave).
-                orElseThrow(() -> new NotFoundException("La nave no ha sido encontrada "));
+        //Valida si existe nave
+        encontrarPorId(idNave);
+
         try {
             return naveRepository.viewAsignedPilot(idNave);
         } catch (EmptyResultDataAccessException e) {

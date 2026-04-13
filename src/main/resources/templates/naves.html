@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Naves</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        .button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Academia Espacial Spring</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/pilotos}">Pilotos</a>
+        <a th:href="@{/naves}">Naves</a>
+        <a th:href="@{/misiones}">Misiones</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Listado de naves</h2>
+
+    <a class="button" th:href="@{/naves/nueva-nave}">Nueva nave</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Modelo</th>
+            <th>Piloto asignado</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="nave : ${naves}">
+            <td th:text="${nave.id}"></td>
+            <td th:text="${nave.nombre}"></td>
+            <td th:text="${nave.modelo}"></td>
+            <td th:text="${nave.pilotoId}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Misiones</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f4f7fb; }
+        header { background: #111827; color: white; padding: 20px; }
+        nav a { color: white; margin-right: 15px; text-decoration: none; font-weight: bold; }
+        main { padding: 30px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: #e5e7eb; }
+        .button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .action-link {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Academia Espacial Spring</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/pilotos}">Pilotos</a>
+        <a th:href="@{/naves}">Naves</a>
+        <a th:href="@{/misiones}">Misiones</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Listado de misiones</h2>
+
+    <a class="button" th:href="@{/misiones/nueva-mision}">Nueva misión</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Destino</th>
+            <th>Estado</th>
+            <th>Nave asignada</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="mision : ${misiones}">
+            <td th:text="${mision.id}"></td>
+            <td th:text="${mision.codigo}"></td>
+            <td th:text="${mision.destino}"></td>
+            <td th:text="${mision.estadoMision}"></td>
+            <td th:text="${mision.naveId}"></td>
+
+            <td>
+                <a class="action-link"
+                   th:href="@{/misiones/{id}(id=${mision.id})}">
+                    Ver detalle
+                </a>
+
+                <a class="action-link"
+                   th:href="@{/misiones/eliminar/{id}(id=${mision.id})}">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</main>

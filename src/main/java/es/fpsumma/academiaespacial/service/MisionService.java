@@ -1,10 +1,13 @@
 package es.fpsumma.academiaespacial.service;
 
+import es.fpsumma.academiaespacial.dto.CreateMisionDto;
+import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import es.fpsumma.academiaespacial.model.Piloto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MisionService {
 
@@ -12,7 +15,7 @@ public interface MisionService {
 
     public Mision mostrarMisionPorId (Integer idMision);
 
-    public void crearMision (String codigo, String destino, EstadoMision estadoMision, Integer naveId);
+    public void crearMision (CreateMisionDto createMisionDto);
 
     public void borrarPorId (Integer id);
 
@@ -21,6 +24,8 @@ public interface MisionService {
     public List<Mision> filtrarMisionesPorPiloto (Integer idPiloto);
 
     public Piloto mostrarInformacionDelPilotoAsignado(Integer idMision );
+
+    public MisionDetalleDto mostrarDetalleMision (Integer idMision);
 
 
 

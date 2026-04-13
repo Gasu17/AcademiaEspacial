@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import lombok.Data;
@@ -83,13 +84,50 @@ public class MisionRepositoryImpl implements MisionRepository {
                 """;
 
         return jdbcTemplate.query(sql, (rs, rowNum) ->
-                        new Mision(
+                new Mision(
                         rs.getInt("id"),
                         rs.getString("codigo"),
                         rs.getString("destino"),
                         EstadoMision.valueOf(rs.getString("estado")),
                         rs.getInt("nave_id")
                 ), idPiloto);
+
+    }
+
+    @Override
+    public MisionDetalleDto viewFullDetailsMision(Integer id) {
+
+        String sql = """
+                SELECT
+                    m.id,
+                    m.codigo,
+                    m.destino,
+                    m.estado,
+                    n.id AS nave_id,
+                    n.nombre AS nave_nombre,
+                    n.modelo,
+                    p.id AS piloto_id,
+                    p.nombre AS piloto_nombre,
+                    p.rango
+                FROM misiones m
+                JOIN naves n ON m.nave_id = n.id
+                JOIN pilotos p ON n.piloto_id = p.id
+                WHERE m.id = ?;
+                """;
+
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+                new MisionDetalleDto(
+                        rs.getInt("id"),
+                        rs.getString("codigo"),
+                        rs.getString("destino"),
+                        EstadoMision.valueOf(rs.getString("estado")),
+                        rs.getInt("nave_id"),
+                        rs.getString("nave_nombre"),
+                        rs.getString("modelo"),
+                        rs.getInt("piloto_id"),
+                        rs.getString("piloto_nombre"),
+                        rs.getString("rango")
+                ), id);
 
     }
 

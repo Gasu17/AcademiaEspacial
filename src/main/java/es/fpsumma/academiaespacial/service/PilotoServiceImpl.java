@@ -1,10 +1,13 @@
 package es.fpsumma.academiaespacial.service;
 
+import es.fpsumma.academiaespacial.dto.CreatePilotoDto;
+import es.fpsumma.academiaespacial.exceptions.NotFoundException;
 import es.fpsumma.academiaespacial.model.Piloto;
 import es.fpsumma.academiaespacial.repository.PilotoRepository;
 import es.fpsumma.academiaespacial.repository.PilotoRepositoryImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,12 +31,20 @@ public class PilotoServiceImpl implements PilotoService {
     }
 
     @Override
-    public void crearPiloto(String nombre, String rango) {
-        Piloto piloto = new Piloto(nombre, rango);
+    public void crearPiloto(CreatePilotoDto createPilotoDto) {
+        Piloto piloto = new Piloto(
+                createPilotoDto.nombre(),
+                createPilotoDto.rango()
+        );
         pilotoRepository.save(piloto);
     }
-    public  Optional <Piloto> encontrarPorId (Integer id) {
-        return Optional.of(pilotoRepository.findById(id));
+
+    public Piloto encontrarPorId(Integer id) {
+        try {
+            return pilotoRepository.findById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException("No fue encontrado el piloto ");
+        }
 
 
     }

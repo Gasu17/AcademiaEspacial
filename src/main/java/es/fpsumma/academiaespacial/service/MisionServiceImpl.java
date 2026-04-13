@@ -1,5 +1,7 @@
 package es.fpsumma.academiaespacial.service;
 
+import es.fpsumma.academiaespacial.dto.CreateMisionDto;
+import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
 import es.fpsumma.academiaespacial.exceptions.NotFoundException;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
@@ -12,6 +14,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Data
@@ -37,15 +40,15 @@ public class MisionServiceImpl implements MisionService {
     }
 
     @Override
-    public void crearMision(String codigo, String destino, EstadoMision estadoMision, Integer naveId) {
-        naveService.encontrarPorId(naveId).
-                orElseThrow(() -> new NotFoundException("El id de la nave no fue encontrado"));
+    public void crearMision(CreateMisionDto createMisionDto) {
+        // Valida si nave existe
+        naveService.encontrarPorId(createMisionDto.naveId());
 
         Mision mision = new Mision(
-                codigo,
-                destino,
-                estadoMision,
-                naveId
+                createMisionDto.codigo(),
+                createMisionDto.destino(),
+                createMisionDto.estadoMision(),
+                createMisionDto.naveId()
         );
 
         misionRepository.save(mision);
@@ -62,8 +65,8 @@ public class MisionServiceImpl implements MisionService {
 
     @Override
     public void actualizarEstadoMision(Integer id, EstadoMision estadoMision) {
-        naveService.encontrarPorId(id).
-                orElseThrow(() -> new NotFoundException("La misión no fue encontrada"));
+        //Valida si existe
+        mostrarMisionPorId(id);
 
         if (estadoMision == null) {
             throw new IllegalArgumentException("El estado de la misión no puede ser nulo");
@@ -88,6 +91,17 @@ public class MisionServiceImpl implements MisionService {
     public Piloto mostrarInformacionDelPilotoAsignado(Integer idMision) {
         Mision mision = misionRepository.findById(idMision);
         return naveService.verPilotoAsignado(mision.getNaveId());
+
+
+    }
+
+    @Override
+    public MisionDetalleDto mostrarDetalleMision(Integer idMision) {
+        try {
+            return misionRepository.viewFullDetailsMision(idMision);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException("La mision no fue encontrada");
+        }
 
 
     }

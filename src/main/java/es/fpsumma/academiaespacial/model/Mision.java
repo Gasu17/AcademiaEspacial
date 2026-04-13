@@ -13,7 +13,7 @@ public class Mision {
     private String destino;
     private EstadoMision  estadoMision;
     private Integer naveId;
-
+    // No me va el lombook  en una parte del codigo :(
     public Mision(String codigo, String destino, EstadoMision estadoMision, Integer naveId) {
         this.codigo = codigo;
         this.destino = destino;

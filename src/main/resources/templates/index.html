@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Academia Espacial Spring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 260px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Academia Espacial Spring</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/pilotos}">Pilotos</a>
+        <a th:href="@{/naves}">Naves</a>
+        <a th:href="@{/misiones}">Misiones</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Panel principal</h2>
+    <p>Bienvenido a la aplicación de gestión de la Academia Espacial.</p>
+
+    <div class="card-container">
+        <div class="card">
+            <h2>Pilotos</h2>
+            <p>Consulta el listado completo de pilotos registrados.</p>
+            <a class="button" href="pilotos.html">Ver pilotos</a>
+        </div>
+
+        <div class="card">
+            <h2>Naves</h2>
+            <p>Consulta el listado de naves y su piloto asignado.</p>
+            <a class="button" href="naves.html">Ver naves</a>
+        </div>
+
+        <div class="card">
+            <h2>Misiones</h2>
+            <p>Consulta, crea y gestiona las misiones del sistema.</p>
+            <a class="button" href="misiones.html">Ver misiones</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

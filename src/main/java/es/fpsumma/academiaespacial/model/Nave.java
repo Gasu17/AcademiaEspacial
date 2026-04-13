@@ -16,7 +16,7 @@ public class Nave {
     @NotNull
     private String modelo;
     private Integer pilotoId;
-
+// Lo mismo no me va el loombok
     public Nave(String nombre, String modelo, Integer pilotoId) {
         this.nombre = nombre;
         this.modelo = modelo;

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva misión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Academia Espacial Spring</h1>
+    <nav>
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/pilotos}">Pilotos</a>
+        <a th:href="@{/naves}">Naves</a>
+        <a th:href="@{/misiones}">Misiones</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Nueva misión</h2>
+
+    <div class="form-card">
+        <form action="#" method="post">
+            <label for="codigo">Código</label>
+            <input type="text" id="codigo" name="codigo" value="MS-004">
+
+            <label for="destino">Destino</label>
+            <input type="text" id="destino" name="destino" value="Venus">
+
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+                <option>PLANIFICADA</option>
+                <option>EN_CURSO</option>
+                <option>COMPLETADA</option>
+            </select>
+
+            <label for="nave">Nave asignada</label>
+            <select id="nave" name="naveId">
+                <option value="1">Nebula-1</option>
+                <option value="2">Titan-7</option>
+                <option value="3">Falcon-X</option>
+            </select>
+
+            <button type="submit">Guardar misión</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

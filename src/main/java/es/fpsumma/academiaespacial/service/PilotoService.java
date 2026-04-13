@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.service;
 
+import es.fpsumma.academiaespacial.dto.CreatePilotoDto;
 import es.fpsumma.academiaespacial.model.Piloto;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public interface PilotoService {
 
     public void borrarPiloto(Integer id);
 
-    public void crearPiloto(String nombre, String rango);
+    public void crearPiloto(CreatePilotoDto createPilotoDto);
 
-    public Optional<Piloto> encontrarPorId(Integer id);
+    public Piloto encontrarPorId(Integer id);
 
 }

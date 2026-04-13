@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de misión</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f4f7fb; }
+        header { background: #111827; color: white; padding: 20px; }
+        nav a { color: white; margin-right: 15px; text-decoration: none; font-weight: bold; }
+        main { padding: 30px; }
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 700px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .label {
+            font-weight: bold;
+        }
+        form {
+            margin-top: 20px;
+        }
+        select, button {
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Detalle de misión</title>
+    </head>
+    <body>
+
+    <header>
+        <h1>Academia Espacial Spring</h1>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/pilotos}">Pilotos</a>
+            <a th:href="@{/naves}">Naves</a>
+            <a th:href="@{/misiones}">Misiones</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Detalle de misión</h2>
+
+        <div class="card">
+            <div class="section">
+                <p><span class="label">ID:</span> <span th:text="${mision.id}"></span></p>
+                <p><span class="label">Código:</span> <span th:text="${mision.codigo}"></span></p>
+                <p><span class="label">Destino:</span> <span th:text="${mision.destino}"></span></p>
+                <p><span class="label">Estado:</span> <span th:text="${mision.estado}"></span></p>
+            </div>
+
+            <div class="section">
+                <h3>Nave asociada</h3>
+                <p><span class="label">Nombre:</span> <span th:text="${mision.naveNombre}"></span></p>
+                <p><span class="label">Modelo:</span> <span th:text="${mision.modelo}"></span></p>
+            </div>
+
+            <div class="section">
+                <h3>Piloto responsable</h3>
+                <p><span class="label">Nombre:</span> <span th:text="${mision.nombre}"></span></p>
+                <p><span class="label">Rango:</span> <span th:text="${mision.rango}"></span></p>
+            </div>
+
+            <div class="section">
+                <h3>Cambiar estado</h3>
+                <form th:action="@{/misiones/actualizarEstado}" method="post">
+                    <input type="hidden" name="id" th:value="${mision.id}" />
+
+                    <label for="estado">Nuevo estado:</label><br>
+                    <select id="estado" name="estado">
+                        <option th:value="PLANIFICADA"
+                                th:selected="${mision.estado == 'PLANIFICADA'}">PLANIFICADA</option>
+                        <option th:value="EN_CURSO"
+                                th:selected="${mision.estado == 'EN_CURSO'}">EN_CURSO</option>
+                        <option th:value="COMPLETADA"
+                                th:selected="${mision.estado == 'COMPLETADA'}">COMPLETADA</option>
+                    </select>
+                    <br>
+                    <button type="submit">Actualizar estado</button>
+                </form>
+            </div>
+        </div>
+    </main>

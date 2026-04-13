@@ -16,6 +16,7 @@ public interface NaveRepository {
 
     public void save(Nave nave);
 
-    public Piloto viewAsignedPilot (Integer idNave);
+    public Piloto viewAsignedPilot(Integer idNave);
+
 
 }

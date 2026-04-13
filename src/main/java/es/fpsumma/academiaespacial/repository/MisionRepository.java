@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 
@@ -18,6 +19,8 @@ public interface MisionRepository {
     public void updateStateById(Integer id, EstadoMision estadoMision);
 
     public List<Mision> filterMisionByPilotId(Integer idPiloto);
+
+    public MisionDetalleDto viewFullDetailsMision (Integer id);
 
 
 }

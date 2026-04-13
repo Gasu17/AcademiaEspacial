@@ -1,13 +1,15 @@
 package es.fpsumma.academiaespacial.dto;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
-public record NaveDto(
+@Builder
+public record CreatePilotoDto(
+
+
         @NotNull
         String nombre,
         @NotNull
-        String modelo,
-
-        Integer pilotoId
+        String rango
 ) {
 }
