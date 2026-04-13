@@ -24,6 +24,7 @@ public class MisionServiceImpl implements MisionService {
     private final MisionRepositoryImpl misionRepository;
     private final NaveServiceImpl naveService;
 
+
     @Override
     public List<Mision> listarMisiones() {
         return misionRepository.listAll();
@@ -42,13 +43,13 @@ public class MisionServiceImpl implements MisionService {
     @Override
     public void crearMision(CreateMisionDto createMisionDto) {
         // Valida si nave existe
-        naveService.encontrarPorId(createMisionDto.naveId());
+        naveService.encontrarPorId(createMisionDto.getNaveId());
 
         Mision mision = new Mision(
-                createMisionDto.codigo(),
-                createMisionDto.destino(),
-                createMisionDto.estadoMision(),
-                createMisionDto.naveId()
+                createMisionDto.getCodigo(),
+                createMisionDto.getDestino(),
+                createMisionDto.getEstadoMision(),
+                createMisionDto.getNaveId()
         );
 
         misionRepository.save(mision);

@@ -10,16 +10,17 @@ import org.springframework.stereotype.Component;
 public class TestServiceRunner implements CommandLineRunner {
 
     private final MisionService misionService;
-    private final NaveServiceImpl naveService ;
+    private final NaveServiceImpl naveService;
+    private final PilotoService pilotoService;
 
-    public TestServiceRunner(MisionService misionService, NaveServiceImpl naveService) {
+    public TestServiceRunner(MisionService misionService, NaveServiceImpl naveService, PilotoServiceImpl pilotoServiceImpl, PilotoService pilotoService) {
         this.misionService = misionService;
         this.naveService = naveService;
+        this.pilotoService = pilotoService;
     }
 
     @Override
     public void run(String... args) {
-     //   System.out.println(misionService.listarMisiones());
-        System.out.println(naveService.verTodosLosPilotoAsignados());
+        System.out.println(pilotoService.listarPilotos());
     }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record CreateNaveDto(
+        Integer id ,
         @NotNull
         String nombre,
         @NotNull

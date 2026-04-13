@@ -19,13 +19,18 @@ import org.springframework.web.bind.annotation.*;
 @Data
 @AllArgsConstructor
 @Slf4j
+@RequestMapping("/misiones")
 public class MisionesController {
     MisionServiceImpl misionService;
     NaveServiceImpl naveService;
     PilotoServiceImpl pilotoService;
 
-    @GetMapping("/misiones")
+
+
+
+    @GetMapping
     public String verMisiones(Model model) {
+        log.info("Intento de ver controlador");
         model.addAttribute("misiones", misionService.listarMisiones());
         return "misiones";
     }
@@ -37,13 +42,13 @@ public class MisionesController {
         return "nueva-mision";
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/guardar-mision")
     public String guardarMision(@Valid @ModelAttribute("mision") CreateMisionDto createMisionDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.info("El dto no cumple con las validaciones");
             return "nueva-mision";
         }
-        return ("/misiones");
+        return ("redirect:/misiones");
 
 
     }
@@ -54,16 +59,16 @@ public class MisionesController {
         return "detalle-mision";
     }
 
-    @GetMapping("/{id}/editar")
-    public String verDetalleMision(@PathVariable Integer id, Model model) {
+    @GetMapping("/editar/{id}")
+    public String verDetalleMision(@PathVariable  Integer id, Model model) {
         model.addAttribute("mison", misionService.mostrarMisionPorId(id));
-        return ("/detalle-mision");
+        return ("detalle-mision");
     }
 
     @PostMapping("/{id}")
     public String actualizarEstado(@PathVariable Integer id, @RequestParam EstadoMision estado) {
         if (estado == null) {
-            log.info("Estado nulo");
+            log.warn("Estado nulo");
             return "redirect:/misiones";
         }
         misionService.actualizarEstadoMision(id, estado);

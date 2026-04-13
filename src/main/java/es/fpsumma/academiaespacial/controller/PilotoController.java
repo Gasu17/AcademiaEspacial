@@ -12,18 +12,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
 @Data
 @AllArgsConstructor
+@RequestMapping("/pilotos")
 public class PilotoController {
     PilotoServiceImpl pilotoService;
 
 
-    @GetMapping("/pilotos")
+    @GetMapping
     public String verPilotos (Model model){
-        model.addAttribute("piloto", pilotoService.listarPilotos());
+        model.addAttribute("pilotos", pilotoService.listarPilotos());
         return "pilotos";
     }
 
@@ -35,14 +37,15 @@ public class PilotoController {
     }
 
 
-    @PostMapping ("/guardar")
+    @PostMapping ("/guardar-piloto")
     public String guardarPiloto (@Valid @ModelAttribute ("piloto") CreatePilotoDto createPilotoDto, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             log.info("El dto no cumple las validaciones");
-            return "/nuevo-piloto";
+            return "nuevo-piloto";
         }
         pilotoService.crearPiloto(createPilotoDto);
-        return "pilotos";
+        log.info(" piloto creado");
+        return "redirect:/pilotos";
     }
 
 

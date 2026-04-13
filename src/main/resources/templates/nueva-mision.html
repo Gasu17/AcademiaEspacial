@@ -74,22 +74,26 @@
     <h2>Nueva misión</h2>
 
     <div class="form-card">
-        <form action="#" method="post">
+        <form th:action="@{/guardar-mision}" th:object="${mision}" method="post">
+
+            <input type="hidden" th:field="*{id}" />
+
             <label for="codigo">Código</label>
-            <input type="text" id="codigo" name="codigo" value="MS-004">
+            <input type="text" id="codigo" th:field="*{codigo}" />
 
             <label for="destino">Destino</label>
-            <input type="text" id="destino" name="destino" value="Venus">
+            <input type="text" id="destino" th:field="*{destino}" />
 
             <label for="estado">Estado</label>
-            <select id="estado" name="estado">
-                <option>PLANIFICADA</option>
-                <option>EN_CURSO</option>
-                <option>COMPLETADA</option>
+            <select id="estado" th:field="*{estadoMision}">
+                <option th:each="estado : ${T(com.tu.paquete.EstadoMision).values()}"
+                        th:value="${estado}"
+                        th:text="${estado}">
+                </option>
             </select>
 
             <label for="nave">Nave asignada</label>
-            <select id="nave" name="naveId">
+            <select id="nave" th:field="*{naveId}">
                 <option value="1">Nebula-1</option>
                 <option value="2">Titan-7</option>
                 <option value="3">Falcon-X</option>
@@ -99,5 +103,3 @@
         </form>
     </div>
 </main>
-</body>
-</html>

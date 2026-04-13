@@ -76,8 +76,9 @@
     <h2>Nuevo piloto</h2>
 
     <div class="form-card">
-        <form action="#" method="post">
-            <label for="nombre">Nombre</label>
+        <form th:action="@{/pilotos/guardar-piloto}" th:object="${piloto}" method="post">
+
+        <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre">
 
             <label for="rango">Rango</label>

@@ -51,7 +51,7 @@ public class NaveRepositoryImpl implements NaveRepository {
 
     @Override
     public void save(Nave nave) {
-        String sql = "INSERT INTO naves (id, nombre,modelo,pilotoId ) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO naves ( nombre,modelo,piloto_id ) VALUES (?,?,?)";
         jdbcTemplate.update(sql, nave.getNombre(), nave.getModelo(), nave.getPilotoId());
     }
 

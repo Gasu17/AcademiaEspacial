@@ -21,8 +21,10 @@ public class PilotoRepositoryImpl implements PilotoRepository {
         String sql = "SELECT * FROM pilotos ";
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Piloto(
+                        rs.getInt("id"),
                         rs.getString("nombre"),
                         rs.getString("rango")
+
                 ));
 
     }

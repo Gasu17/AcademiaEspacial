@@ -74,23 +74,26 @@
     <h2>Nueva nave</h2>
 
     <div class="form-card">
-        <form action="#" method="post">
+        <form th:action="@{/naves/guardar}" th:object="${nave}" method="post">
+
+            <input type="hidden" th:field="*{id}" />
+
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre">
+            <input type="text" id="nombre" th:field="*{nombre}" />
 
             <label for="modelo">Modelo</label>
-            <input type="text" id="modelo" name="modelo">
+            <input type="text" id="modelo" th:field="*{modelo}" />
 
             <label for="piloto">Piloto asignado</label>
-            <select id="piloto" name="pilotoId">
-                <option value="1">Nova Vega</option>
-                <option value="2">Kai Orion</option>
-                <option value="3">Luna Solaris</option>
+            <select id="piloto" th:field="*{pilotoId}">
+                <option value="">-- Seleccione un piloto --</option>
+                <option th:each="piloto : ${listaPilotos}"
+                        th:value="${piloto.id}"
+                        th:text="${piloto.nombre}">
+                </option>
             </select>
 
             <button type="submit">Guardar nave</button>
         </form>
     </div>
 </main>
-</body>
-</html>
