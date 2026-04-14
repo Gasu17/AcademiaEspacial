@@ -74,9 +74,9 @@
     <h2>Nueva misión</h2>
 
     <div class="form-card">
-        <form th:action="@{/guardar-mision}" th:object="${mision}" method="post">
+        <form th:action="@{/misiones/guardar-mision}" th:object="${mision}" method="post">
 
-            <input type="hidden" th:field="*{id}" />
+
 
             <label for="codigo">Código</label>
             <input type="text" id="codigo" th:field="*{codigo}" />
@@ -86,7 +86,7 @@
 
             <label for="estado">Estado</label>
             <select id="estado" th:field="*{estadoMision}">
-                <option th:each="estado : ${T(com.tu.paquete.EstadoMision).values()}"
+                <option th:each="estado : ${EstadoMision}"
                         th:value="${estado}"
                         th:text="${estado}">
                 </option>

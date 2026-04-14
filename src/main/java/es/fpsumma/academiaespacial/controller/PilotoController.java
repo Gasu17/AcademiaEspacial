@@ -47,6 +47,7 @@ public class PilotoController {
         log.info(" piloto creado");
         return "redirect:/pilotos";
     }
+    // @GetMapping ("/eliminar/{id")
 
 
 }

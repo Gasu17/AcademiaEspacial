@@ -71,14 +71,13 @@
 
             <td>
                 <a class="action-link"
-                   th:href="@{/misiones/{id}(id=${mision.id})}">
+                   th:href="@{/misiones/detalle/{id}(id=${mision.id})}">
                     Ver detalle
                 </a>
 
-                <a class="action-link"
-                   th:href="@{/misiones/eliminar/{id}(id=${mision.id})}">
-                    Eliminar
-                </a>
+                <form th:action="@{/misiones/eliminar/{id}(id=${mision.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="action-link delete">Eliminar</button>
+                </form>
             </td>
         </tr>
 

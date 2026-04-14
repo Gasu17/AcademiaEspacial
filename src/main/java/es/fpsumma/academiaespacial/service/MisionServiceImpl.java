@@ -2,7 +2,9 @@ package es.fpsumma.academiaespacial.service;
 
 import es.fpsumma.academiaespacial.dto.CreateMisionDto;
 import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
+import es.fpsumma.academiaespacial.dto.ResponseMisionDto;
 import es.fpsumma.academiaespacial.exceptions.NotFoundException;
+import es.fpsumma.academiaespacial.mapper.MisionMapper;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import es.fpsumma.academiaespacial.model.Piloto;
@@ -10,9 +12,11 @@ import es.fpsumma.academiaespacial.repository.MisionRepositoryImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,11 +28,17 @@ public class MisionServiceImpl implements MisionService {
     private final MisionRepositoryImpl misionRepository;
     private final NaveServiceImpl naveService;
 
+    private final MisionMapper misionMapper;
+
 
     @Override
-    public List<Mision> listarMisiones() {
-        return misionRepository.listAll();
+    public List<ResponseMisionDto> listarMisiones() {
+        return misionRepository.listAll()
+                .stream()
+                .map(misionMapper::toDto)
+                .toList();
     }
+
 
     @Override
     public Mision mostrarMisionPorId(Integer idMision) {
@@ -45,14 +55,8 @@ public class MisionServiceImpl implements MisionService {
         // Valida si nave existe
         naveService.encontrarPorId(createMisionDto.getNaveId());
 
-        Mision mision = new Mision(
-                createMisionDto.getCodigo(),
-                createMisionDto.getDestino(),
-                createMisionDto.getEstadoMision(),
-                createMisionDto.getNaveId()
-        );
 
-        misionRepository.save(mision);
+        misionRepository.save(createMisionDto);
         log.info("Se guardo la misión");
     }
 

@@ -26,8 +26,6 @@ public class MisionesController {
     PilotoServiceImpl pilotoService;
 
 
-
-
     @GetMapping
     public String verMisiones(Model model) {
         log.info("Intento de ver controlador");
@@ -39,6 +37,7 @@ public class MisionesController {
     @GetMapping("/nueva-mision")
     public String nuevaMision(Model model) {
         model.addAttribute("mision", CreateMisionDto.builder().build());
+        model.addAttribute("EstadoMision", EstadoMision.values());
         return "nueva-mision";
     }
 
@@ -53,26 +52,27 @@ public class MisionesController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/detalle/{id}")
     public String detalleMision(@PathVariable Integer id, Model model) {
         model.addAttribute("mision", misionService.mostrarDetalleMision(id));
         return "detalle-mision";
     }
 
     @GetMapping("/editar/{id}")
-    public String verDetalleMision(@PathVariable  Integer id, Model model) {
+    public String verDetalleMision(@PathVariable Integer id, Model model) {
         model.addAttribute("mison", misionService.mostrarMisionPorId(id));
         return ("detalle-mision");
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/actualizarEstado/{id}")
     public String actualizarEstado(@PathVariable Integer id, @RequestParam EstadoMision estado) {
         if (estado == null) {
             log.warn("Estado nulo");
             return "redirect:/misiones";
         }
+        log.warn(String.valueOf(id));
         misionService.actualizarEstadoMision(id, estado);
-        return ("redirect:/misiones/" + id);
+        return ("redirect:/misiones");
     }
 
     @PostMapping("/eliminar/{id}")

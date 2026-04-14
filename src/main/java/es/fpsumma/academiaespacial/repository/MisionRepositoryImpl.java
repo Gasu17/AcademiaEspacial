@@ -1,13 +1,17 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.dto.CreateMisionDto;
 import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
+import es.fpsumma.academiaespacial.dto.ResponseMisionDto;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Data
@@ -41,6 +45,7 @@ public class MisionRepositoryImpl implements MisionRepository {
         String sql = "SELECT * FROM misiones WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Mision(
+                        rs.getInt("id"),
                         rs.getString("codigo"),
                         rs.getString("destino"),
                         EstadoMision.valueOf(rs.getString("estado")),
@@ -49,8 +54,8 @@ public class MisionRepositoryImpl implements MisionRepository {
     }
 
     @Override
-    public void save(Mision mision) {
-        String sql = "INSERT INTO misiones (id,codigo,destino,estadoMision,naveId) VALUES (?,?,?,?,?)";
+    public void save(CreateMisionDto mision) {
+        String sql = "INSERT INTO misiones (codigo,destino,estadoMision,naveId) VALUES (?,?,?,?)";
         jdbcTemplate.update(sql, mision.getCodigo(), mision.getDestino(), mision.getEstadoMision(), mision.getNaveId());
     }
 
@@ -63,8 +68,12 @@ public class MisionRepositoryImpl implements MisionRepository {
     @Override
 
     public void updateStateById(Integer id, EstadoMision estadoMision) {
-        String sql = "UPDATE misiones SET estado = ? WHERE id = ? ";
-        jdbcTemplate.update(sql, id, estadoMision);
+        try {
+            String sql = "UPDATE misiones SET estado = ? WHERE id = ? ";
+            jdbcTemplate.update(sql, String.valueOf(estadoMision), id);
+        } catch (Exception e){
+            System.out.println("FALLO SQL UPDATE STATE");
+        }
 
     }
 

@@ -1,6 +1,8 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.dto.CreateMisionDto;
 import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
+import es.fpsumma.academiaespacial.dto.ResponseMisionDto;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 
@@ -12,7 +14,7 @@ public interface MisionRepository {
 
     public Mision findById(Integer id);
 
-    public void save(Mision mision);
+    public void save(CreateMisionDto mision);
 
     public void deleteById(Integer id);
 

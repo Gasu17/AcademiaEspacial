@@ -78,11 +78,12 @@
 
             <div class="section">
                 <h3>Cambiar estado</h3>
-                <form th:action="@{/misiones/actualizarEstado}" method="post">
+                <form th:action="@{/misiones/actualizarEstado/{id}(id=${mision.id})}" method="post">
                     <input type="hidden" name="id" th:value="${mision.id}" />
 
                     <label for="estado">Nuevo estado:</label><br>
                     <select id="estado" name="estado">
+
                         <option th:value="PLANIFICADA"
                                 th:selected="${mision.estado == 'PLANIFICADA'}">PLANIFICADA</option>
                         <option th:value="EN_CURSO"

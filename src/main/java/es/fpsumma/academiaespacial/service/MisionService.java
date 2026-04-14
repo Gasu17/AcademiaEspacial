@@ -2,6 +2,7 @@ package es.fpsumma.academiaespacial.service;
 
 import es.fpsumma.academiaespacial.dto.CreateMisionDto;
 import es.fpsumma.academiaespacial.dto.MisionDetalleDto;
+import es.fpsumma.academiaespacial.dto.ResponseMisionDto;
 import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import es.fpsumma.academiaespacial.model.Piloto;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 public interface MisionService {
 
-    public List<Mision> listarMisiones ();
+    public List<ResponseMisionDto> listarMisiones ();
 
     public Mision mostrarMisionPorId (Integer idMision);
 
