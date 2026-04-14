@@ -19,6 +19,7 @@ public class NaveRepositoryImpl implements NaveRepository {
         String sql = "SELECT * FROM naves ";
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Nave(
+                        rs.getInt("id"),
                         rs.getString("nombre"),
                         rs.getString("modelo"),
                         rs.getInt("piloto_id")
@@ -70,5 +71,9 @@ public class NaveRepositoryImpl implements NaveRepository {
                         rs.getString("nombre"),
                         rs.getString("rango")
                 ), idNave);
+    }
+    public void quitarPiloto (Integer id) {
+        String sql = "Update naves set piloto_id = NULL where piloto_id = ?";
+        jdbcTemplate.update(sql , id );
     }
 }

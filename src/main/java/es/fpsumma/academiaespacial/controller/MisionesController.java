@@ -47,6 +47,7 @@ public class MisionesController {
             log.info("El dto no cumple con las validaciones");
             return "nueva-mision";
         }
+        misionService.crearMision(createMisionDto);
         return ("redirect:/misiones");
 
 

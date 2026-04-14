@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.model.Nave;
 import es.fpsumma.academiaespacial.model.Piloto;
 
 import java.util.List;
@@ -15,5 +16,6 @@ public interface PilotoRepository {
     public void deleteById(Integer id);
 
     public void save(Piloto piloto);
+    public List<Nave> verPilotoAsignado (Integer idPiloto) ;
 
 }

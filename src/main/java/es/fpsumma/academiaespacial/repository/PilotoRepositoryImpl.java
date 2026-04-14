@@ -54,4 +54,15 @@ public class PilotoRepositoryImpl implements PilotoRepository {
         jdbcTemplate.update(sql, piloto.getNombre(), piloto.getRango());
 
     }
+
+    @Override
+    public List<Nave> verPilotoAsignado(Integer idPiloto) {
+        return List.of();
+    }
+
+//    public List<Nave>  verPilotoAsignado (Integer idPiloto) {
+//        String sql = "Select naves.nave_id, pilotos.piloto_id from nave inner JOIN pilotos ON naves.nave_id = pilotos_id;   "
+//
+//    }
+
 }

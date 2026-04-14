@@ -55,8 +55,8 @@ public class MisionRepositoryImpl implements MisionRepository {
 
     @Override
     public void save(CreateMisionDto mision) {
-        String sql = "INSERT INTO misiones (codigo,destino,estadoMision,naveId) VALUES (?,?,?,?)";
-        jdbcTemplate.update(sql, mision.getCodigo(), mision.getDestino(), mision.getEstadoMision(), mision.getNaveId());
+        String sql = "INSERT INTO misiones (codigo,destino,estado,nave_id) VALUES (?,?,?,?)";
+        jdbcTemplate.update(sql, mision.getCodigo(), mision.getDestino(), mision.getEstadoMision().name(), mision.getNaveId());
     }
 
     @Override

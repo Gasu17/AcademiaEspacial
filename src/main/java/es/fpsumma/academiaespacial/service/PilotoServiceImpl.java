@@ -3,6 +3,8 @@ package es.fpsumma.academiaespacial.service;
 import es.fpsumma.academiaespacial.dto.CreatePilotoDto;
 import es.fpsumma.academiaespacial.exceptions.NotFoundException;
 import es.fpsumma.academiaespacial.model.Piloto;
+import es.fpsumma.academiaespacial.repository.NaveRepository;
+import es.fpsumma.academiaespacial.repository.NaveRepositoryImpl;
 import es.fpsumma.academiaespacial.repository.PilotoRepository;
 import es.fpsumma.academiaespacial.repository.PilotoRepositoryImpl;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class PilotoServiceImpl implements PilotoService {
 
     private final PilotoRepositoryImpl pilotoRepository;
+    private final NaveRepositoryImpl naveRepository;
 
     @Override
     public List<Piloto> listarPilotos() {
@@ -27,6 +30,7 @@ public class PilotoServiceImpl implements PilotoService {
 
     @Override
     public void borrarPiloto(Integer id) {
+        naveRepository.quitarPiloto(id);
         pilotoRepository.deleteById(id);
     }
 

@@ -86,4 +86,8 @@ public class NaveServiceImpl implements NaveService {
 
 
     }
+
+    public void desAsignarPiloto (Integer id ){
+        naveRepository.quitarPiloto(id);
+    }
 }

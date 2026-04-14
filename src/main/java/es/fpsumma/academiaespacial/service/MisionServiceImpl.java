@@ -9,6 +9,7 @@ import es.fpsumma.academiaespacial.model.EstadoMision;
 import es.fpsumma.academiaespacial.model.Mision;
 import es.fpsumma.academiaespacial.model.Piloto;
 import es.fpsumma.academiaespacial.repository.MisionRepositoryImpl;
+import jakarta.servlet.ServletOutputStream;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -53,11 +54,23 @@ public class MisionServiceImpl implements MisionService {
     @Override
     public void crearMision(CreateMisionDto createMisionDto) {
         // Valida si nave existe
-        naveService.encontrarPorId(createMisionDto.getNaveId());
+        try {
 
 
-        misionRepository.save(createMisionDto);
-        log.info("Se guardo la misión");
+            naveService.encontrarPorId(createMisionDto.getNaveId());
+        } catch (Exception e) {
+            System.out.println("fallo ->  " + createMisionDto.toString());
+        }
+try {
+
+
+    System.out.println(createMisionDto.toString());
+    misionRepository.save(createMisionDto);
+    log.info("Se guardo la misión");
+}  catch (Exception e) {
+        System.out.println("fallo 2 ->  " + createMisionDto.toString());
+    }
+
     }
 
     @Override
@@ -102,6 +115,8 @@ public class MisionServiceImpl implements MisionService {
 
     @Override
     public MisionDetalleDto mostrarDetalleMision(Integer idMision) {
+
+        log.info(idMision.toString());
         try {
             return misionRepository.viewFullDetailsMision(idMision);
         } catch (EmptyResultDataAccessException e) {

@@ -31,6 +31,21 @@
             font-weight: bold;
             margin-right: 10px;
         }
+
+        /* ⭐ Nuevo estilo del botón de eliminar */
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 12px;
+        }
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
     </style>
 </head>
 <body>
@@ -76,7 +91,7 @@
                 </a>
 
                 <form th:action="@{/misiones/eliminar/{id}(id=${mision.id})}" method="post" style="display:inline;">
-                    <button type="submit" class="action-link delete">Eliminar</button>
+                    <button type="submit" class="delete-btn">Eliminar</button>
                 </form>
             </td>
         </tr>
@@ -84,3 +99,5 @@
         </tbody>
     </table>
 </main>
+</body>
+</html>

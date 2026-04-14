@@ -21,6 +21,6 @@ public class TestServiceRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println(pilotoService.listarPilotos());
+        System.out.println(misionService.listarMisiones() + "no funciona");
     }
 }

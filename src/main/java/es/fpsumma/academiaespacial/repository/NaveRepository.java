@@ -18,5 +18,7 @@ public interface NaveRepository {
 
     public Piloto viewAsignedPilot(Integer idNave);
 
+    public void quitarPiloto (Integer id );
+
 
 }

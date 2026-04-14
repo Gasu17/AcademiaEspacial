@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -24,22 +21,22 @@ public class PilotoController {
 
 
     @GetMapping
-    public String verPilotos (Model model){
+    public String verPilotos(Model model) {
         model.addAttribute("pilotos", pilotoService.listarPilotos());
         return "pilotos";
     }
 
 
-    @GetMapping ("/nuevo-piloto")
-    public String nuevoPiloto (Model model){
-        model.addAttribute("piloto", CreatePilotoDto.builder().build() );
+    @GetMapping("/nuevo-piloto")
+    public String nuevoPiloto(Model model) {
+        model.addAttribute("piloto", CreatePilotoDto.builder().build());
         return "nuevo-piloto";
     }
 
 
-    @PostMapping ("/guardar-piloto")
-    public String guardarPiloto (@Valid @ModelAttribute ("piloto") CreatePilotoDto createPilotoDto, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){
+    @PostMapping("/guardar-piloto")
+    public String guardarPiloto(@Valid @ModelAttribute("piloto") CreatePilotoDto createPilotoDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             log.info("El dto no cumple las validaciones");
             return "nuevo-piloto";
         }
@@ -47,7 +44,14 @@ public class PilotoController {
         log.info(" piloto creado");
         return "redirect:/pilotos";
     }
-    // @GetMapping ("/eliminar/{id")
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarPiloto(@PathVariable Integer id) {
+
+        pilotoService.borrarPiloto(id);
+
+        return "redirect:/pilotos";
+    }
 
 
 }
