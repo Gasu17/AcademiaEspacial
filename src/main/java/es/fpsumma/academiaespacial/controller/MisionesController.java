@@ -38,6 +38,7 @@ public class MisionesController {
     public String nuevaMision(Model model) {
         model.addAttribute("mision", CreateMisionDto.builder().build());
         model.addAttribute("EstadoMision", EstadoMision.values());
+        model.addAttribute("naves", naveService.listarNaves());
         return "nueva-mision";
     }
 
@@ -82,5 +83,12 @@ public class MisionesController {
 
         return "redirect:/misiones";
     }
+
+    @GetMapping("/buscar")
+    public String buscarPorId (@RequestParam("id") Integer id, Model model  ){
+        model.addAttribute("mision", misionService.mostrarDetalleMision(id) );
+        return "detalle-mision";
+    }
+
 
 }

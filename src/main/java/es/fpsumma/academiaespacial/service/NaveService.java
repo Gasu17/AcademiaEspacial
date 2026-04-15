@@ -1,6 +1,7 @@
 package es.fpsumma.academiaespacial.service;
 
 import es.fpsumma.academiaespacial.dto.CreateNaveDto;
+import es.fpsumma.academiaespacial.dto.ResponseNaveDto;
 import es.fpsumma.academiaespacial.model.Nave;
 import es.fpsumma.academiaespacial.model.Piloto;
 
@@ -11,12 +12,13 @@ public interface NaveService {
 
     public List<Nave> listarNaves();
 
-    public Nave encontrarPorId(Integer id);
+    public ResponseNaveDto encontrarPorId(Integer id);
 
     public void borrarPorId(Integer id);
 
     public void registrarNave(CreateNaveDto naveDto);
 
-    public Map<String, Piloto > verTodosLosPilotoAsignados();
+    // Metodo sin uso
+   //  public Map<String, Piloto > verTodosLosPilotoAsignados();
 
 }

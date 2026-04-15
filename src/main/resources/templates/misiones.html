@@ -32,7 +32,6 @@
             margin-right: 10px;
         }
 
-        /* ⭐ Nuevo estilo del botón de eliminar */
         .delete-btn {
             background: #dc2626;
             color: white;
@@ -61,6 +60,16 @@
 
 <main>
     <h2>Listado de misiones</h2>
+
+    <!-- ⭐ Barra de búsqueda por ID -->
+    <form th:action="@{/misiones/buscar}" method="get" style="margin-bottom: 20px;">
+        <input type="number" name="id" placeholder="Buscar misión por ID"
+               style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 200px;">
+        <button type="submit"
+                style="padding: 8px 12px; background:#2563eb; color:white; border:none; border-radius:6px; cursor:pointer;">
+            Buscar
+        </button>
+    </form>
 
     <a class="button" th:href="@{/misiones/nueva-mision}">Nueva misión</a>
 

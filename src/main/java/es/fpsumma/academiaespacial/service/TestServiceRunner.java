@@ -17,10 +17,15 @@ public class TestServiceRunner implements CommandLineRunner {
         this.misionService = misionService;
         this.naveService = naveService;
         this.pilotoService = pilotoService;
+
     }
 
     @Override
     public void run(String... args) {
-        System.out.println(misionService.listarMisiones() + "no funciona");
+//        System.out.println(misionService.listarMisiones() + "no funciona");
+//        System.out.println(naveService.listarNaves());
+//        System.out.println(pilotoService.listarPilotos());
+       //  naveService.verTodosLosPilotoAsignados();
+        System.out.println(naveService.verPilotoAsignado(1));
     }
 }

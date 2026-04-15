@@ -54,22 +54,11 @@ public class MisionServiceImpl implements MisionService {
     @Override
     public void crearMision(CreateMisionDto createMisionDto) {
         // Valida si nave existe
-        try {
+        naveService.encontrarPorId(createMisionDto.getNaveId());
 
 
-            naveService.encontrarPorId(createMisionDto.getNaveId());
-        } catch (Exception e) {
-            System.out.println("fallo ->  " + createMisionDto.toString());
-        }
-try {
-
-
-    System.out.println(createMisionDto.toString());
-    misionRepository.save(createMisionDto);
-    log.info("Se guardo la misión");
-}  catch (Exception e) {
-        System.out.println("fallo 2 ->  " + createMisionDto.toString());
-    }
+        misionRepository.save(createMisionDto);
+        log.info("Se guardo la misión");
 
     }
 
@@ -92,7 +81,7 @@ try {
 
         misionRepository.updateStateById(id, estadoMision);
     }
-
+// Sin uso
     @Override
     public List<Mision> filtrarMisionesPorPiloto(Integer idPiloto) {
 

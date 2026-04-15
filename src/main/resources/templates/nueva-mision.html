@@ -94,10 +94,12 @@
 
             <label for="nave">Nave asignada</label>
             <select id="nave" th:field="*{naveId}">
-                <option value="1">Nebula-1</option>
-                <option value="2">Titan-7</option>
-                <option value="3">Falcon-X</option>
+                <option th:each="n : ${naves}"
+                        th:value="${n.id}"
+                        th:text="${n.nombre}">
+                </option>
             </select>
+
 
             <button type="submit">Guardar misión</button>
         </form>

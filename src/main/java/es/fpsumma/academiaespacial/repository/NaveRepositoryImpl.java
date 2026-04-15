@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.dto.CreateNaveDto;
 import es.fpsumma.academiaespacial.model.Nave;
 import es.fpsumma.academiaespacial.model.Piloto;
 import lombok.Data;
@@ -38,7 +39,7 @@ public class NaveRepositoryImpl implements NaveRepository {
                         rs.getString("nombre"),
                         rs.getString("modelo"),
                         rs.getInt("piloto_id")
-                ),id );
+                ), id);
     }
 
 
@@ -51,7 +52,7 @@ public class NaveRepositoryImpl implements NaveRepository {
     }
 
     @Override
-    public void save(Nave nave) {
+    public void save(Nave nave ) {
         String sql = "INSERT INTO naves ( nombre,modelo,piloto_id ) VALUES (?,?,?)";
         jdbcTemplate.update(sql, nave.getNombre(), nave.getModelo(), nave.getPilotoId());
     }
@@ -59,6 +60,7 @@ public class NaveRepositoryImpl implements NaveRepository {
     public Piloto viewAsignedPilot(Integer idNave) {
         String sql = """
                 SELECT
+                
                     p.nombre,
                     p.rango
                 FROM pilotos p
@@ -68,12 +70,14 @@ public class NaveRepositoryImpl implements NaveRepository {
 
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Piloto(
+
                         rs.getString("nombre"),
                         rs.getString("rango")
                 ), idNave);
     }
-    public void quitarPiloto (Integer id) {
+
+    public void quitarPiloto(Integer id) {
         String sql = "Update naves set piloto_id = NULL where piloto_id = ?";
-        jdbcTemplate.update(sql , id );
+        jdbcTemplate.update(sql, id);
     }
 }

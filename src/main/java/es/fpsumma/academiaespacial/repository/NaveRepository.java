@@ -1,5 +1,6 @@
 package es.fpsumma.academiaespacial.repository;
 
+import es.fpsumma.academiaespacial.dto.CreateNaveDto;
 import es.fpsumma.academiaespacial.model.Nave;
 import es.fpsumma.academiaespacial.model.Piloto;
 
@@ -14,7 +15,7 @@ public interface NaveRepository {
 
     public void deleteById(Integer id);
 
-    public void save(Nave nave);
+    public void save(Nave nave );
 
     public Piloto viewAsignedPilot(Integer idNave);
 
